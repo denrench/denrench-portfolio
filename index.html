@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- FontAwesome для иконок -->
+    <style>
+        /* Основной стиль страницы */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #00c6ff, #07944b);
+            color: #fff;
+        }
+
+        header {
+            background: rgba(0, 0, 0, 0.3); /* Прозрачный фон */
+            color: #fff;
+            padding: 1rem 0;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+            font-size: 1rem; /* Уменьшаем размер шрифта для меню */
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        nav a:hover {
+            background: #f0f0f0;
+            color: #0072ff;
+        }
+
+        /* Горизонтальная линия под меню */
+        header::after {
+            content: "";
+            display: block;
+            height: 2px;
+            background: #fff;
+            width: 80%;
+            margin: 1rem auto 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 3rem 1rem;
+        }
+
+        .profile {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            margin-bottom: 2rem;
+        }
+
+        .profile img {
+            max-width: 200px;
+            border-radius: 50%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .profile .text {
+            max-width: 600px;
+        }
+
+        .profile h2 {
+            font-size: 2.5rem;
+            margin: 0.5rem 0;
+        }
+
+        .skills {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .skill {
+            perspective: 1000px; /* Ожидание 3D эффекта */
+        }
+
+        .skill-card {
+            width: 100%;
+            height: 250px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.6s;
+            transform-style: preserve-3d; /* Сохраняет 3D эффект */
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .skill-card .front,
+        .skill-card .back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 15px;
+            padding: 10px;
+            box-sizing: border-box;
+            backface-visibility: hidden; /* Скрывает заднюю сторону при повороте */
+        }
+
+        .skill-card .front {
+            background: #00c6ff;
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        .skill-card .back {
+            background: #07944b;
+            color: white;
+            font-size: 1rem;
+            text-align: center;
+            border-radius: 15px;
+            transform: rotateY(180deg); /* Поворачиваем заднюю сторону */
+        }
+
+        .skill-card:hover {
+            transform: rotateY(180deg); /* Переворачиваем карточку при наведении */
+        }
+
+        .quote {
+            font-style: italic;
+            font-size: 1.2rem;
+            color: #ddd;
+            margin: 1rem;
+            text-align: center;
+        }
+
+        /* Иконки соц.сетей */
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .social-icons a {
+            color: #fff;
+            font-size: 2rem;
+            transition: transform 0.3s;
+        }
+
+        .social-icons a:hover {
+            transform: scale(1.2);
+        }
+
+        footer {
+            background: rgba(0, 0, 0, 0.4); /* Прозрачный футер */
+            color: #fff;
+            text-align: center;
+            padding: 1.5rem 0;
+            position: relative;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .profile {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .profile img {
+                margin-bottom: 1rem;
+            }
+
+            .skills {
+                grid-template-columns: 1fr;
+            }
+        }
+
+    </style>
+    <title>Портфолио Denrench</title>   
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="#me">Я</a>
+            <a href="#about">Обо мне</a>
+            <a href="#skills">Мои возможности</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <!-- Раздел "Я" -->
+        <section id="me" class="section">
+            <div class="profile">
+                <img src="profile.jpeg" alt="Моё фото">
+                <div class="text">
+                    <h2>Данилов Данил</h2>
+                    <p><strong>Дата рождения:</strong> 24 июня 2009</p>
+                    <p>Я увлекаюсь веб-разработкой, изучаю современные технологии и стремлюсь к профессиональному развитию.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Раздел с цитатами -->
+        <section id="quotes">
+            <div class="quote">"Программирование — это как поэзия: сначала учишься, потом творишь."</div>
+            <div class="quote">"Хороший веб-дизайн — это не только красиво, но и удобно."</div>
+        </section>
+
+        <!-- Раздел "Мои возможности" -->
+        <section id="skills" class="section">
+            <h2>Мои возможности</h2>
+            <div class="skills">
+                <div class="skill">
+                    <div class="skill-card">
+                        <div class="front">HTML</div> <!-- Название навыка -->
+                        <div class="back">Хорошо владею основами разметки и созданием структур страниц.</div> <!-- Описание -->
+                    </div>
+                </div>
+                <div class="skill">
+                    <div class="skill-card">
+                        <div class="front">CSS</div>
+                        <div class="back">Стилизация страниц, адаптивный дизайн, анимации.</div>
+                    </div>
+                </div>
+                <div class="skill">
+                    <div class="skill-card">
+                        <div class="front">JavaScript</div>
+                        <div class="back">Работа с интерактивными элементами и функционалом.</div>
+                    </div>
+                </div>
+                <div class="skill">
+                    <div class="skill-card">
+                        <div class="front">Git</div>
+                        <div class="back">Управление версиями проектов.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Иконки соц.сетей -->
+        <section id="social" class="social-icons">
+            <a href="https://t.me/yourusername" target="_blank" title="Telegram">
+                <i class="fab fa-telegram-plane"></i>
+            </a>
+            <a href="https://www.instagram.com/yourusername" target="_blank" title="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Моё портфолио. Все права защищены.</p>
+    </footer>
+</body>
+</html>
