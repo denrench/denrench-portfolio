@@ -4,26 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- FontAwesome для иконок -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
-        /* Основной стиль страницы */
         body {
             font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(to right, #00c6ff, #07944b);
-            color: #fff;
+            background-color: #121212;
+            color: #ddd;
+            line-height: 1.6;
+            font-size: 1.2rem;
         }
 
         header {
-            background: rgba(0, 0, 0, 0.3); /* Прозрачный фон */
+            background: #333;
             color: #fff;
             padding: 1rem 0;
             text-align: center;
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
         }
 
         nav {
@@ -31,7 +32,7 @@
             justify-content: center;
             gap: 2rem;
             margin-top: 1rem;
-            font-size: 1rem; /* Уменьшаем размер шрифта для меню */
+            font-size: 1.1rem;
         }
 
         nav a {
@@ -40,22 +41,12 @@
             font-weight: 500;
             padding: 0.5rem 1rem;
             border-radius: 5px;
-            transition: background 0.3s;
+            transition: background 0.3s, transform 0.3s ease-in-out;
         }
 
         nav a:hover {
-            background: #f0f0f0;
-            color: #0072ff;
-        }
-
-        /* Горизонтальная линия под меню */
-        header::after {
-            content: "";
-            display: block;
-            height: 2px;
-            background: #fff;
-            width: 80%;
-            margin: 1rem auto 0;
+            background: #ff6f61;
+            transform: scale(1.1);
         }
 
         .container {
@@ -64,217 +55,269 @@
             padding: 3rem 1rem;
         }
 
-        .profile {
+        section {
+            margin-bottom: 4rem;
+        }
+
+        .profile-container {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 15px;
-            padding: 2rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            margin-bottom: 2rem;
-        }
-
-        .profile img {
-            max-width: 200px;
-            border-radius: 50%;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .profile .text {
-            max-width: 600px;
-        }
-
-        .profile h2 {
-            font-size: 2.5rem;
-            margin: 0.5rem 0;
-        }
-
-        .skills {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .skill {
-            perspective: 1000px; /* Ожидание 3D эффекта */
-        }
-
-        .skill-card {
-            width: 100%;
-            height: 250px;
-            background: #fff;
-            border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            transition: transform 0.6s;
-            transform-style: preserve-3d; /* Сохраняет 3D эффект */
+            flex-direction: column;
+            background: rgba(0, 0, 0, 0.7); 
+            padding: 3rem;
+            border-radius: 10px;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
             position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            animation: fadeIn 2s ease-in-out;
         }
 
-        .skill-card .front,
-        .skill-card .back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 15px;
-            padding: 10px;
-            box-sizing: border-box;
-            backface-visibility: hidden; /* Скрывает заднюю сторону при повороте */
+        .profile-container img {
+            border-radius: 50%;
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            margin-bottom: 2rem;
+            animation: slideIn 1s ease-in-out;
         }
 
-        .skill-card .front {
-            background: #00c6ff;
-            color: white;
-            font-size: 1.8rem;
-            font-weight: 500;
+        .profile-container p {
             text-align: center;
+            font-size: 1.3rem;
+            margin: 0;
+            color: #fff;
         }
 
-        .skill-card .back {
-            background: #07944b;
-            color: white;
-            font-size: 1rem;
-            text-align: center;
-            border-radius: 15px;
-            transform: rotateY(180deg); /* Поворачиваем заднюю сторону */
+        /* Анимации */
+        @keyframes slideIn {
+            0% {
+                opacity: 0;
+                transform: translateX(-100px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
 
-        .skill-card:hover {
-            transform: rotateY(180deg); /* Переворачиваем карточку при наведении */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .quote {
-            font-style: italic;
-            font-size: 1.2rem;
-            color: #ddd;
-            margin: 1rem;
-            text-align: center;
-        }
-
-        /* Иконки соц.сетей */
+        /* Иконки */
         .social-icons {
             display: flex;
             justify-content: center;
-            gap: 2rem;
-            margin-top: 2rem;
+            gap: 1.5rem;
+            margin-top: 3rem;
         }
 
         .social-icons a {
-            color: #fff;
             font-size: 2rem;
-            transition: transform 0.3s;
+            color: #fff;
+            transition: transform 0.3s, color 0.3s;
         }
 
         .social-icons a:hover {
+            color: #ff6f61;
             transform: scale(1.2);
         }
 
-        footer {
-            background: rgba(0, 0, 0, 0.4); /* Прозрачный футер */
-            color: #fff;
-            text-align: center;
-            padding: 1.5rem 0;
-            position: relative;
+        .profession-container {
+            margin-top: 3rem;
+            background: #333;
+            padding: 3rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
         }
 
-        /* Адаптивность */
+        h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        h4 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #ff6f61;
+        }
+
+        p {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .trend-section {
+            background-color: #444;
+            padding: 3rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+            margin-bottom: 4rem;
+        }
+
+        .trend-section h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #ff6f61;
+        }
+
+        .trend-section p {
+            font-size: 1.2rem;
+            color: #ddd;
+        }
+
+        .trend-section ul {
+            list-style-type: disc;
+            margin-left: 2rem;
+            margin-top: 1rem;
+        }
+
+        .trend-section ul li {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Мобильная версия */
         @media (max-width: 768px) {
-            .profile {
+            nav {
                 flex-direction: column;
-                align-items: center;
             }
 
-            .profile img {
-                margin-bottom: 1rem;
+            .container {
+                padding: 1rem;
             }
 
-            .skills {
-                grid-template-columns: 1fr;
+            .social-icons {
+                flex-direction: column;
+                gap: 1rem;
             }
+        }
+
+        footer {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1rem 0;
         }
 
     </style>
-    <title>Портфолио Denrench</title>   
+    <title>Портфолио начинающего разработчика</title>
 </head>
 <body>
+
     <header>
         <nav>
             <a href="#me">Я</a>
             <a href="#about">Обо мне</a>
-            <a href="#skills">Мои возможности</a>
+            <a href="#it-professions">IT профессии</a>
+            <a href="#it-trends">Тренды в IT</a>
+            <a href="#web-development">Веб-разработка</a>
         </nav>
     </header>
 
     <div class="container">
         <!-- Раздел "Я" -->
-        <section id="me" class="section">
-            <div class="profile">
+        <section id="me">
+            <h2 class="fade-in">Привет! Я начинающий разработчик</h2>
+            <div class="profile-container fade-in">
                 <img src="profile.jpeg" alt="Моё фото">
-                <div class="text">
-                    <h2>Данилов Данил</h2>
-                    <p><strong>Дата рождения:</strong> 24 июня 2009</p>
-                    <p>Я увлекаюсь веб-разработкой, изучаю современные технологии и стремлюсь к профессиональному развитию.</p>
-                </div>
+                <p>Меня зовут Данилов Данил, мне 15 лет. Я изучаю веб-разработку и стремлюсь стать профессионалом в этой области. Моя цель — создавать удобные и эффективные веб-приложения, которые решают реальные задачи.</p>
             </div>
         </section>
 
-        <!-- Раздел с цитатами -->
-        <section id="quotes">
-            <div class="quote">"Программирование — это как поэзия: сначала учишься, потом творишь."</div>
-            <div class="quote">"Хороший веб-дизайн — это не только красиво, но и удобно."</div>
-        </section>
+        <!-- Раздел "О веб-разработке" -->
+        <section id="web-development">
+            <h2 class="fade-in">Веб-разработка</h2>
+            <div class="trend-section">
+                <h3>Что такое веб-разработка?</h3>
+                <p>Веб-разработка — это процесс создания, проектирования и обслуживания веб-сайтов и веб-приложений. Веб-разработчик отвечает за все, что происходит на веб-странице, от создания пользовательского интерфейса (frontend) до взаимодействия с сервером (backend).</p>
+                <p>Веб-разработка может быть разделена на два основных направления:</p>
+                <ul>
+                    <li><strong>Frontend-разработка:</strong> Это создание интерфейса, с которым взаимодействуют пользователи. Включает HTML, CSS, JavaScript и фреймворки, такие как React или Vue.js.</li>
+                    <li><strong>Backend-разработка:</strong> Это работа с серверной частью веб-приложений, включая базы данных, обработку данных и управление сервером. Используются языки, такие как Python, Ruby, PHP, и фреймворки, например, Node.js или Django.</li>
+                </ul>
 
-        <!-- Раздел "Мои возможности" -->
-        <section id="skills" class="section">
-            <h2>Мои возможности</h2>
-            <div class="skills">
-                <div class="skill">
-                    <div class="skill-card">
-                        <div class="front">HTML</div> <!-- Название навыка -->
-                        <div class="back">Хорошо владею основами разметки и созданием структур страниц.</div> <!-- Описание -->
-                    </div>
-                </div>
-                <div class="skill">
-                    <div class="skill-card">
-                        <div class="front">CSS</div>
-                        <div class="back">Стилизация страниц, адаптивный дизайн, анимации.</div>
-                    </div>
-                </div>
-                <div class="skill">
-                    <div class="skill-card">
-                        <div class="front">JavaScript</div>
-                        <div class="back">Работа с интерактивными элементами и функционалом.</div>
-                    </div>
-                </div>
-                <div class="skill">
-                    <div class="skill-card">
-                        <div class="front">Git</div>
-                        <div class="back">Управление версиями проектов.</div>
-                    </div>
-                </div>
+                <h3>Почему стоит стать веб-разработчиком?</h3>
+                <p>Веб-разработка — это одна из самых востребованных профессий в мире. С каждым годом все больше компаний переходят в онлайн, и потребность в разработчиках растет. Вот несколько причин, почему стоит заниматься веб-разработкой:</p>
+                <ul>
+                    <li><strong>Большие возможности для карьерного роста:</strong> Веб-разработчики могут работать в различных областях, начиная от стартапов до крупных корпораций.</li>
+                    <li><strong>Высокая зарплата:</strong> Веб-разработчики получают конкурентоспособные заработные платы, которые увеличиваются с опытом.</li>
+                    <li><strong>Гибкость работы:</strong> Множество веб-разработчиков работают удаленно, что дает свободу выбора рабочего места и времени.</li>
+                </ul>
             </div>
         </section>
 
-        <!-- Иконки соц.сетей -->
-        <section id="social" class="social-icons">
-            <a href="https://t.me/yourusername" target="_blank" title="Telegram">
-                <i class="fab fa-telegram-plane"></i>
-            </a>
-            <a href="https://www.instagram.com/yourusername" target="_blank" title="Instagram">
-                <i class="fab fa-instagram"></i>
-            </a>
+        <!-- Раздел "IT профессии" -->
+        <section id="it-professions">
+            <h2 class="fade-in">Профессии в IT</h2>
+            <div class="profession-container">
+                <h3>Разработчик программного обеспечения</h3>
+                <p>Разработчик программного обеспечения создает и поддерживает программы, которые используются в различных областях, включая игры, бизнес-решения и мобильные приложения. Это одна из самых популярных профессий в IT, с высоким спросом на квалифицированных специалистов.</p>
+                <h4>Заработок:</h4>
+                <p>Заработная плата разработчиков зависит от их уровня опыта и региона, но в среднем она варьируется от $60,000 до $120,000 в год.</p>
+
+                <h3>Веб-разработчик</h3>
+                <p>Веб-разработчики создают веб-сайты и веб-приложения. Они могут работать с клиентской (front-end) или серверной (back-end) частью веб-сайтов, а также заниматься их оптимизацией.</p>
+                <h4>Заработок:</h4>
+                <p>Средний доход веб-разработчика в США составляет от $50,000 до $100,000 в год в зависимости от опыта и навыков.</p>
+
+                <h3>Аналитик данных</h3>
+                <p>Аналитики данных собирают и анализируют данные для помощи компаниям в принятии обоснованных решений. Они используют различные инструменты, такие как Python и SQL, для обработки данных.</p>
+                <h4>Заработок:</h4>
+                <p>Средний заработок аналитика данных варьируется от $55,000 до $110,000 в год в зависимости от опыта и специализации.</p>
+
+                <h3>Специалист по кибербезопасности</h3>
+                <p>Киберспециалисты работают над защитой систем и данных от внешних угроз. Эта профессия требует глубоких знаний в области информационной безопасности.</p>
+                <h4>Заработок:</h4>
+                <p>Заработная плата специалистов по кибербезопасности может колебаться от $70,000 до $150,000 в год.</p>
+            </div>
+        </section>
+
+        <!-- Раздел "Тренды в IT" -->
+        <section id="it-trends" class="trend-section">
+            <h3>Тренды в IT</h3>
+            <p>Мир информационных технологий постоянно развивается. В настоящее время несколько технологий оказывают огромное влияние на будущее. Вот некоторые из них:</p>
+            <ul>
+                <li><strong>Искусственный интеллект (AI):</strong> AI используется в различных сферах — от машинного обучения до аналитики данных. Это одна из самых перспективных областей в IT.</li>
+                <li><strong>Блокчейн:</strong> Применение блокчейн-технологий выходит за рамки криптовалют, обеспечивая прозрачность и безопасность транзакций в различных отраслях.</li>
+                <li><strong>Интернет вещей (IoT):</strong> IoT соединяет устройства в сети для обмена данными и создания "умных" домов и городов.</li>
+                <li><strong>5G:</strong> Следующий шаг в мобильных технологиях, который откроет новые возможности для быстрой передачи данных и улучшения связи.</li>
+            </ul>
+        </section>
+
+        <!-- Иконки социальных сетей -->
+        <section>
+            <div class="social-icons">
+                <a href="https://github.com/danilov" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/danilov" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="mailto:danilov.danil@example.com"><i class="fas fa-envelope"></i></a>
+            </div>
         </section>
     </div>
 
     <footer>
         <p>&copy; 2025 Моё портфолио. Все права защищены.</p>
     </footer>
+
+    <script>
+        // Анимация при скроллинге
+        window.addEventListener('scroll', function () {
+            const fadeIns = document.querySelectorAll('.fade-in');
+            fadeIns.forEach(function (element) {
+                if (element.getBoundingClientRect().top < window.innerHeight) {
+                    element.classList.add('visible');
+                }
+            });
+        });
+    </script>
+
 </body>
 </html>
